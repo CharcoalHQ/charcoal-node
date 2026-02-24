@@ -10,7 +10,7 @@ const client = new Charcoal({
 describe('resource namespaces', () => {
   // Mock server tests are disabled
   test.skip('list', async () => {
-    const responsePromise = client.beta.namespaces.list();
+    const responsePromise = client.namespaces.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

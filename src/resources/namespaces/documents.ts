@@ -1,9 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../core/resource';
-import { APIPromise } from '../../../core/api-promise';
-import { RequestOptions } from '../../../internal/request-options';
-import { path } from '../../../internal/utils/path';
+import { APIResource } from '../../core/resource';
+import * as NamespacesAPI from './namespaces';
+import { APIPromise } from '../../core/api-promise';
+import { RequestOptions } from '../../internal/request-options';
+import { path } from '../../internal/utils/path';
 
 export class Documents extends APIResource {
   /**
@@ -20,7 +21,7 @@ export class Documents extends APIResource {
     namespace: string,
     body: DocumentDeleteParams,
     options?: RequestOptions,
-  ): APIPromise<DocumentDeleteResponse> {
+  ): APIPromise<DeleteDocumentsResponse> {
     return this._client.delete(path`/v1beta/namespaces/${namespace}/documents`, { body, ...options });
   }
 
@@ -32,9 +33,13 @@ export class Documents extends APIResource {
     namespace: string,
     body: DocumentUpsertParams,
     options?: RequestOptions,
-  ): APIPromise<DocumentUpsertResponse> {
+  ): APIPromise<UpsertDocumentsResponse> {
     return this._client.post(path`/v1beta/namespaces/${namespace}/documents`, { body, ...options });
   }
+}
+
+export interface DeleteDocumentsResponse {
+  documents_deleted: number;
 }
 
 export interface Document {
@@ -46,16 +51,12 @@ export interface Document {
   [k: string]: unknown;
 }
 
+export interface UpsertDocumentsResponse {
+  documents_upserted: number;
+}
+
 export interface DocumentListResponse {
   results: Array<Document>;
-}
-
-export interface DocumentDeleteResponse {
-  documents_deleted: number;
-}
-
-export interface DocumentUpsertResponse {
-  documents_upserted: number;
 }
 
 export interface DocumentDeleteParams {
@@ -68,45 +69,15 @@ export interface DocumentUpsertParams {
   /**
    * Optional explicit schema for the documents. If omitted, schema is inferred.
    */
-  schema?: { [key: string]: DocumentUpsertParams.Schema };
-}
-
-export namespace DocumentUpsertParams {
-  export interface Schema {
-    type:
-      | 'string'
-      | 'int'
-      | 'uint'
-      | 'float'
-      | 'uuid'
-      | 'datetime'
-      | 'bool'
-      | '[]string'
-      | '[]int'
-      | '[]uint'
-      | '[]float'
-      | '[]uuid'
-      | '[]datetime'
-      | '[]bool';
-
-    /**
-     * Whether this attribute is filterable.
-     */
-    filterable?: boolean;
-
-    /**
-     * Whether this attribute is indexed for full-text search (BM25).
-     */
-    full_text_search?: boolean;
-  }
+  schema?: { [key: string]: NamespacesAPI.NamespaceAttributeConfig };
 }
 
 export declare namespace Documents {
   export {
+    type DeleteDocumentsResponse as DeleteDocumentsResponse,
     type Document as Document,
+    type UpsertDocumentsResponse as UpsertDocumentsResponse,
     type DocumentListResponse as DocumentListResponse,
-    type DocumentDeleteResponse as DocumentDeleteResponse,
-    type DocumentUpsertResponse as DocumentUpsertResponse,
     type DocumentDeleteParams as DocumentDeleteParams,
     type DocumentUpsertParams as DocumentUpsertParams,
   };

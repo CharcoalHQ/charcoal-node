@@ -16,8 +16,12 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import { Filter, NamespaceSearchParams, NamespaceSearchResponse, Namespaces } from './resources/namespaces';
-import { Beta } from './resources/beta/beta';
+import {
+  Namespace,
+  NamespaceAttributeConfig,
+  NamespaceListResponse,
+  Namespaces,
+} from './resources/namespaces/namespaces';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -730,22 +734,18 @@ export class Charcoal {
 
   static toFile = Uploads.toFile;
 
-  beta: API.Beta = new API.Beta(this);
   namespaces: API.Namespaces = new API.Namespaces(this);
 }
 
-Charcoal.Beta = Beta;
 Charcoal.Namespaces = Namespaces;
 
 export declare namespace Charcoal {
   export type RequestOptions = Opts.RequestOptions;
 
-  export { Beta as Beta };
-
   export {
     Namespaces as Namespaces,
-    type Filter as Filter,
-    type NamespaceSearchResponse as NamespaceSearchResponse,
-    type NamespaceSearchParams as NamespaceSearchParams,
+    type Namespace as Namespace,
+    type NamespaceAttributeConfig as NamespaceAttributeConfig,
+    type NamespaceListResponse as NamespaceListResponse,
   };
 }

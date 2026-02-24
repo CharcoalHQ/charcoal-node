@@ -7,10 +7,10 @@ const client = new Charcoal({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource namespaces', () => {
+describe('resource search', () => {
   // Mock server tests are disabled
-  test.skip('search: only required params', async () => {
-    const responsePromise = client.namespaces.search('namespace', {
+  test.skip('create: only required params', async () => {
+    const responsePromise = client.namespaces.search.create('namespace', {
       high_level_goal: 'high_level_goal',
       search_query: 'search_query',
     });
@@ -24,11 +24,11 @@ describe('resource namespaces', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('search: required and optional params', async () => {
-    const response = await client.namespaces.search('namespace', {
+  test.skip('create: required and optional params', async () => {
+    const response = await client.namespaces.search.create('namespace', {
       high_level_goal: 'high_level_goal',
       search_query: 'search_query',
-      filters: { $and: [] },
+      filters: { $and: [{}] },
       max_results: 0,
       stream: true,
     });

@@ -29,9 +29,12 @@ const client = new Charcoal({
   apiKey: process.env['CHARCOAL_API_KEY'], // This is the default and can be omitted
 });
 
-const namespaces = await client.beta.namespaces.list();
+const searchResponse = await client.namespaces.search.create('my-namespace', {
+  high_level_goal: 'Quarterly summary',
+  search_query: 'What happened last quarter?',
+});
 
-console.log(namespaces.results);
+console.log(searchResponse.session_id);
 ```
 
 ### Request & Response types
@@ -46,7 +49,14 @@ const client = new Charcoal({
   apiKey: process.env['CHARCOAL_API_KEY'], // This is the default and can be omitted
 });
 
-const namespaces: Charcoal.Beta.NamespaceListResponse = await client.beta.namespaces.list();
+const params: Charcoal.Namespaces.SearchCreateParams = {
+  high_level_goal: 'Quarterly summary',
+  search_query: 'What happened last quarter?',
+};
+const searchResponse: Charcoal.Namespaces.SearchResponse = await client.namespaces.search.create(
+  'my-namespace',
+  params,
+);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -59,15 +69,20 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const namespaces = await client.beta.namespaces.list().catch(async (err) => {
-  if (err instanceof Charcoal.APIError) {
-    console.log(err.status); // 400
-    console.log(err.name); // BadRequestError
-    console.log(err.headers); // {server: 'nginx', ...}
-  } else {
-    throw err;
-  }
-});
+const searchResponse = await client.namespaces.search
+  .create('my-namespace', {
+    high_level_goal: 'Quarterly summary',
+    search_query: 'What happened last quarter?',
+  })
+  .catch(async (err) => {
+    if (err instanceof Charcoal.APIError) {
+      console.log(err.status); // 400
+      console.log(err.name); // BadRequestError
+      console.log(err.headers); // {server: 'nginx', ...}
+    } else {
+      throw err;
+    }
+  });
 ```
 
 Error codes are as follows:
@@ -99,7 +114,7 @@ const client = new Charcoal({
 });
 
 // Or, configure per-request:
-await client.beta.namespaces.list({
+await client.namespaces.search.create('my-namespace', { high_level_goal: 'Quarterly summary', search_query: 'What happened last quarter?' }, {
   maxRetries: 5,
 });
 ```
@@ -116,7 +131,7 @@ const client = new Charcoal({
 });
 
 // Override per-request:
-await client.beta.namespaces.list({
+await client.namespaces.search.create('my-namespace', { high_level_goal: 'Quarterly summary', search_query: 'What happened last quarter?' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -139,13 +154,23 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Charcoal();
 
-const response = await client.beta.namespaces.list().asResponse();
+const response = await client.namespaces.search
+  .create('my-namespace', {
+    high_level_goal: 'Quarterly summary',
+    search_query: 'What happened last quarter?',
+  })
+  .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: namespaces, response: raw } = await client.beta.namespaces.list().withResponse();
+const { data: searchResponse, response: raw } = await client.namespaces.search
+  .create('my-namespace', {
+    high_level_goal: 'Quarterly summary',
+    search_query: 'What happened last quarter?',
+  })
+  .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(namespaces.results);
+console.log(searchResponse.session_id);
 ```
 
 ### Logging
@@ -225,7 +250,7 @@ parameter. This library doesn't validate at runtime that the request matches the
 send will be sent as-is.
 
 ```ts
-client.beta.namespaces.list({
+client.namespaces.search.create({
   // ...
   // @ts-expect-error baz is not yet public
   baz: 'undocumented option',
