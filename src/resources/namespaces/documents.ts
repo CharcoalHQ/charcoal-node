@@ -6,6 +6,9 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
+/**
+ * Manage documents within namespaces.
+ */
 export class Documents extends APIResource {
   /**
    * Lists all documents in a namespace.

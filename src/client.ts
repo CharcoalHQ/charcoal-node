@@ -722,6 +722,9 @@ export class Charcoal {
 
   static toFile = Uploads.toFile;
 
+  /**
+   * Manage namespaces.
+   */
   namespaces: API.Namespaces = new API.Namespaces(this);
 }
 

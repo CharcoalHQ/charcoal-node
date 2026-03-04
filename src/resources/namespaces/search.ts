@@ -5,6 +5,9 @@ import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
+/**
+ * Agentic search over document corpora.
+ */
 export class Search extends APIResource {
   /**
    * Creates a new search session or continues an existing one. Supports streaming

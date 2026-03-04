@@ -16,6 +16,9 @@ import { Search, SearchCreateParams, SearchResponse, SearchResult } from './sear
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 
+/**
+ * Manage namespaces.
+ */
 export class Namespaces extends APIResource {
   documents: DocumentsAPI.Documents = new DocumentsAPI.Documents(this._client);
   search: SearchAPI.Search = new SearchAPI.Search(this._client);
