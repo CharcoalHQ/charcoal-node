@@ -2,33 +2,19 @@
 
 import { APIResource } from '../../core/resource';
 import * as DocumentsAPI from './documents';
+import { DeleteDocumentsResponse, Document, Documents, UpsertDocumentsResponse } from './documents';
+import * as SearchAPI from './search/search';
 import {
-  DeleteDocumentsResponse,
-  Document,
-  DocumentDeleteParams,
-  DocumentListResponse,
-  DocumentUpsertParams,
-  Documents,
-  UpsertDocumentsResponse,
-} from './documents';
-import * as SearchAPI from './search';
-import { Search, SearchCreateParams, SearchResponse, SearchResult } from './search';
-import { APIPromise } from '../../core/api-promise';
-import { RequestOptions } from '../../internal/request-options';
+  Search,
+  SearchCreateParams,
+  SearchListResponse,
+  SearchResponse,
+  SearchResult,
+} from './search/search';
 
-/**
- * Manage namespaces.
- */
 export class Namespaces extends APIResource {
   documents: DocumentsAPI.Documents = new DocumentsAPI.Documents(this._client);
   search: SearchAPI.Search = new SearchAPI.Search(this._client);
-
-  /**
-   * Lists all namespaces for the authenticated company.
-   */
-  list(options?: RequestOptions): APIPromise<NamespaceListResponse> {
-    return this._client.get('/v1beta/namespaces', options);
-  }
 }
 
 export interface Namespace {
@@ -80,34 +66,24 @@ export interface NamespaceAttributeConfig {
   full_text_search?: boolean;
 }
 
-export interface NamespaceListResponse {
-  results: Array<Namespace>;
-}
-
 Namespaces.Documents = Documents;
 Namespaces.Search = Search;
 
 export declare namespace Namespaces {
-  export {
-    type Namespace as Namespace,
-    type NamespaceAttributeConfig as NamespaceAttributeConfig,
-    type NamespaceListResponse as NamespaceListResponse,
-  };
+  export { type Namespace as Namespace, type NamespaceAttributeConfig as NamespaceAttributeConfig };
 
   export {
     Documents as Documents,
     type DeleteDocumentsResponse as DeleteDocumentsResponse,
     type Document as Document,
     type UpsertDocumentsResponse as UpsertDocumentsResponse,
-    type DocumentListResponse as DocumentListResponse,
-    type DocumentDeleteParams as DocumentDeleteParams,
-    type DocumentUpsertParams as DocumentUpsertParams,
   };
 
   export {
     Search as Search,
     type SearchResponse as SearchResponse,
     type SearchResult as SearchResult,
+    type SearchListResponse as SearchListResponse,
     type SearchCreateParams as SearchCreateParams,
   };
 }
