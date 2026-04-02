@@ -62,8 +62,8 @@ describe('resource documents', () => {
       schema: {
         foo: {
           type: 'string',
-          filterable: true,
-          full_text_search: true,
+          is_filterable: true,
+          is_searchable: true,
         },
       },
     });

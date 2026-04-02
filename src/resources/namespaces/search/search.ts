@@ -75,14 +75,14 @@ export type SearchCreateParams =
 export declare namespace SearchCreateParams {
   export interface SearchNewSessionRequest {
     /**
-     * The overarching goal for the search session.
+     * Detailed natural language search request.
      */
-    high_level_goal: string;
+    context: string;
 
     /**
-     * The initial search query.
+     * One sentence describing what you are looking for.
      */
-    search_query: string;
+    objective: string;
 
     /**
      * Recursive filter object. One of: `{ $and: [Filter, ...] }` (all must match),
@@ -108,11 +108,6 @@ export declare namespace SearchCreateParams {
             | SearchNewSessionRequest.Contains
             | SearchNewSessionRequest.ContainsAny;
         };
-
-    /**
-     * Upper bound on the number of results to return.
-     */
-    max_results?: number;
 
     /**
      * Whether to stream the response as server-sent events.

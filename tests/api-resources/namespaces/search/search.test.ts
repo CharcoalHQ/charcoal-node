@@ -11,8 +11,8 @@ describe('resource search', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.namespaces.search.create('namespace', {
-      high_level_goal: 'high_level_goal',
-      search_query: 'search_query',
+      context: 'context',
+      objective: 'objective',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -26,10 +26,9 @@ describe('resource search', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.namespaces.search.create('namespace', {
-      high_level_goal: 'high_level_goal',
-      search_query: 'search_query',
+      context: 'context',
+      objective: 'objective',
       filters: { $and: [{}] },
-      max_results: 0,
       stream: true,
     });
   });

@@ -56,14 +56,14 @@ export interface NamespaceAttributeConfig {
     | '[]bool';
 
   /**
-   * Whether this attribute is filterable.
+   * Whether this attribute can be filtered on.
    */
-  filterable?: boolean;
+  is_filterable?: boolean;
 
   /**
-   * Whether this attribute is indexed for full-text search (BM25).
+   * Whether this attribute can be searched against.
    */
-  full_text_search?: boolean;
+  is_searchable?: boolean;
 }
 
 Namespaces.Documents = Documents;

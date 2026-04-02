@@ -30,8 +30,8 @@ const client = new Charcoal({
 });
 
 const searchResponse = await client.namespaces.search.create('my-namespace', {
-  high_level_goal: 'Quarterly summary',
-  search_query: 'What happened last quarter?',
+  context: 'context',
+  objective: 'objective',
 });
 
 console.log(searchResponse.session_id);
@@ -50,8 +50,8 @@ const client = new Charcoal({
 });
 
 const params: Charcoal.Namespaces.SearchCreateParams = {
-  high_level_goal: 'Quarterly summary',
-  search_query: 'What happened last quarter?',
+  context: 'context',
+  objective: 'objective',
 };
 const searchResponse: Charcoal.Namespaces.SearchResponse = await client.namespaces.search.create(
   'my-namespace',
@@ -70,10 +70,7 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 const searchResponse = await client.namespaces.search
-  .create('my-namespace', {
-    high_level_goal: 'Quarterly summary',
-    search_query: 'What happened last quarter?',
-  })
+  .create('my-namespace', { context: 'context', objective: 'objective' })
   .catch(async (err) => {
     if (err instanceof Charcoal.APIError) {
       console.log(err.status); // 400
@@ -114,7 +111,7 @@ const client = new Charcoal({
 });
 
 // Or, configure per-request:
-await client.namespaces.search.create('my-namespace', { high_level_goal: 'Quarterly summary', search_query: 'What happened last quarter?' }, {
+await client.namespaces.search.create('my-namespace', { context: 'context', objective: 'objective' }, {
   maxRetries: 5,
 });
 ```
@@ -131,7 +128,7 @@ const client = new Charcoal({
 });
 
 // Override per-request:
-await client.namespaces.search.create('my-namespace', { high_level_goal: 'Quarterly summary', search_query: 'What happened last quarter?' }, {
+await client.namespaces.search.create('my-namespace', { context: 'context', objective: 'objective' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -155,19 +152,13 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 const client = new Charcoal();
 
 const response = await client.namespaces.search
-  .create('my-namespace', {
-    high_level_goal: 'Quarterly summary',
-    search_query: 'What happened last quarter?',
-  })
+  .create('my-namespace', { context: 'context', objective: 'objective' })
   .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
 const { data: searchResponse, response: raw } = await client.namespaces.search
-  .create('my-namespace', {
-    high_level_goal: 'Quarterly summary',
-    search_query: 'What happened last quarter?',
-  })
+  .create('my-namespace', { context: 'context', objective: 'objective' })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(searchResponse.session_id);
