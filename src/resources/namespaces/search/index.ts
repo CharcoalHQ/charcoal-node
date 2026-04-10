@@ -2,7 +2,7 @@
 
 export {
   Documents,
-  type DocumentListResponse,
+  type DocumentRetrieveParams,
   type DocumentDeleteParams,
   type DocumentUpsertParams,
 } from './documents';

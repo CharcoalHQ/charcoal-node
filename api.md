@@ -28,12 +28,8 @@ Methods:
 
 ### Documents
 
-Types:
-
-- <code><a href="./src/resources/namespaces/search/documents.ts">DocumentListResponse</a></code>
-
 Methods:
 
-- <code title="get /v1/namespaces/{namespace}/documents">client.namespaces.search.documents.<a href="./src/resources/namespaces/search/documents.ts">list</a>(namespace) -> DocumentListResponse</code>
-- <code title="delete /v1/namespaces/{namespace}/documents">client.namespaces.search.documents.<a href="./src/resources/namespaces/search/documents.ts">delete</a>(namespace, { ...params }) -> DeleteDocumentsResponse</code>
+- <code title="get /v1/namespaces/{namespace}/documents/{documentId}">client.namespaces.search.documents.<a href="./src/resources/namespaces/search/documents.ts">retrieve</a>(documentID, { ...params }) -> Document</code>
+- <code title="post /v1/namespaces/{namespace}/documents/delete">client.namespaces.search.documents.<a href="./src/resources/namespaces/search/documents.ts">delete</a>(namespace, { ...params }) -> DeleteDocumentsResponse</code>
 - <code title="post /v1/namespaces/{namespace}/documents">client.namespaces.search.documents.<a href="./src/resources/namespaces/search/documents.ts">upsert</a>(namespace, { ...params }) -> UpsertDocumentsResponse</code>
