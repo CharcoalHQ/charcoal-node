@@ -12,21 +12,26 @@ import { path } from '../../../internal/utils/path';
  */
 export class Documents extends APIResource {
   /**
-   * Lists all documents in a namespace.
+   * Retrieves a single document by ID from a namespace.
    */
-  list(namespace: string, options?: RequestOptions): APIPromise<DocumentListResponse> {
-    return this._client.get(path`/v1/namespaces/${namespace}/documents`, options);
+  retrieve(
+    documentID: string,
+    params: DocumentRetrieveParams,
+    options?: RequestOptions,
+  ): APIPromise<DocumentsAPI.Document> {
+    const { namespace } = params;
+    return this._client.get(path`/v1/namespaces/${namespace}/documents/${documentID}`, options);
   }
 
   /**
-   * Deletes documents from a namespace.
+   * Deletes documents from a namespace by their IDs.
    */
   delete(
     namespace: string,
     body: DocumentDeleteParams,
     options?: RequestOptions,
   ): APIPromise<DocumentsAPI.DeleteDocumentsResponse> {
-    return this._client.delete(path`/v1/namespaces/${namespace}/documents`, { body, ...options });
+    return this._client.post(path`/v1/namespaces/${namespace}/documents/delete`, { body, ...options });
   }
 
   /**
@@ -42,8 +47,12 @@ export class Documents extends APIResource {
   }
 }
 
-export interface DocumentListResponse {
-  results: Array<DocumentsAPI.Document>;
+export interface DocumentRetrieveParams {
+  /**
+   * Namespace identifier. Alphanumeric characters, hyphens, underscores, and dots.
+   * Max 128 characters.
+   */
+  namespace: string;
 }
 
 export interface DocumentDeleteParams {
@@ -54,14 +63,15 @@ export interface DocumentUpsertParams {
   documents: Array<DocumentsAPI.Document>;
 
   /**
-   * Optional explicit schema for the documents. If omitted, schema is inferred.
+   * Explicit schema for the documents. If omitted, schema is inferred from the
+   * document structure and merged with any existing namespace schema.
    */
   schema?: { [key: string]: NamespacesAPI.NamespaceAttributeConfig };
 }
 
 export declare namespace Documents {
   export {
-    type DocumentListResponse as DocumentListResponse,
+    type DocumentRetrieveParams as DocumentRetrieveParams,
     type DocumentDeleteParams as DocumentDeleteParams,
     type DocumentUpsertParams as DocumentUpsertParams,
   };

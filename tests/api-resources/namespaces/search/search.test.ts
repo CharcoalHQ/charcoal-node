@@ -29,6 +29,7 @@ describe('resource search', () => {
       context: 'context',
       objective: 'objective',
       filters: { $and: [{}] },
+      include_attributes: true,
       stream: true,
     });
   });

@@ -9,8 +9,10 @@ const client = new Charcoal({
 
 describe('resource documents', () => {
   // Mock server tests are disabled
-  test.skip('list', async () => {
-    const responsePromise = client.namespaces.search.documents.list('namespace');
+  test.skip('retrieve: only required params', async () => {
+    const responsePromise = client.namespaces.search.documents.retrieve('documentId', {
+      namespace: 'namespace',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -18,6 +20,13 @@ describe('resource documents', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('retrieve: required and optional params', async () => {
+    const response = await client.namespaces.search.documents.retrieve('documentId', {
+      namespace: 'namespace',
+    });
   });
 
   // Mock server tests are disabled

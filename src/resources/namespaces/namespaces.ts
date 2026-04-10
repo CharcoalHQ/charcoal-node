@@ -18,14 +18,20 @@ export class Namespaces extends APIResource {
 }
 
 export interface Namespace {
+  /**
+   * Unique namespace identifier (e.g. `ns_CjXuYOtW`).
+   */
   id: string;
-
-  company_id: string;
 
   /**
    * ISO 8601 timestamp.
    */
   created_at: string;
+
+  /**
+   * Namespace name. This is the value used in API path parameters.
+   */
+  name: string;
 
   /**
    * ISO 8601 timestamp.

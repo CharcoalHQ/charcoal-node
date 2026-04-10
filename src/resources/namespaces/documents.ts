@@ -8,6 +8,11 @@ export interface DeleteDocumentsResponse {
   documents_deleted: number;
 }
 
+/**
+ * A document is a record with a required `id` and arbitrary attributes. Attribute
+ * types must conform to the namespace's `attributes_schema`. If no schema is
+ * provided during upsert, one is inferred from the document structure.
+ */
 export interface Document {
   /**
    * Document ID. UUID or string up to 64 characters.
