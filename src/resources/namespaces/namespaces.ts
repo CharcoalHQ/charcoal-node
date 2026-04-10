@@ -2,19 +2,33 @@
 
 import { APIResource } from '../../core/resource';
 import * as DocumentsAPI from './documents';
-import { DeleteDocumentsResponse, Document, Documents, UpsertDocumentsResponse } from './documents';
-import * as SearchAPI from './search/search';
 import {
-  Search,
-  SearchCreateParams,
-  SearchListResponse,
-  SearchResponse,
-  SearchResult,
-} from './search/search';
+  DeleteDocumentsResponse,
+  Document,
+  DocumentDeleteParams,
+  DocumentRetrieveParams,
+  DocumentUpsertParams,
+  Documents,
+  UpsertDocumentsResponse,
+} from './documents';
+import * as SearchAPI from './search';
+import { Search, SearchCreateParams, SearchResponse, SearchResult } from './search';
+import { APIPromise } from '../../core/api-promise';
+import { RequestOptions } from '../../internal/request-options';
 
+/**
+ * Manage namespaces.
+ */
 export class Namespaces extends APIResource {
   documents: DocumentsAPI.Documents = new DocumentsAPI.Documents(this._client);
   search: SearchAPI.Search = new SearchAPI.Search(this._client);
+
+  /**
+   * Lists all namespaces for the authenticated organization.
+   */
+  list(options?: RequestOptions): APIPromise<NamespaceListResponse> {
+    return this._client.get('/v1/namespaces', options);
+  }
 }
 
 export interface Namespace {
@@ -41,55 +55,63 @@ export interface Namespace {
   /**
    * Maps attribute names to their configuration.
    */
-  attributes_schema?: { [key: string]: NamespaceAttributeConfig };
+  attributes_schema?: { [key: string]: Namespace.AttributesSchema };
 }
 
-export interface NamespaceAttributeConfig {
-  type:
-    | 'string'
-    | 'int'
-    | 'uint'
-    | 'float'
-    | 'uuid'
-    | 'datetime'
-    | 'bool'
-    | '[]string'
-    | '[]int'
-    | '[]uint'
-    | '[]float'
-    | '[]uuid'
-    | '[]datetime'
-    | '[]bool';
+export namespace Namespace {
+  export interface AttributesSchema {
+    type:
+      | 'string'
+      | 'int'
+      | 'uint'
+      | 'float'
+      | 'uuid'
+      | 'datetime'
+      | 'bool'
+      | '[]string'
+      | '[]int'
+      | '[]uint'
+      | '[]float'
+      | '[]uuid'
+      | '[]datetime'
+      | '[]bool';
 
-  /**
-   * Whether this attribute can be filtered on.
-   */
-  is_filterable?: boolean;
+    /**
+     * Whether this attribute can be filtered on.
+     */
+    is_filterable?: boolean;
 
-  /**
-   * Whether this attribute can be searched against.
-   */
-  is_searchable?: boolean;
+    /**
+     * Whether this attribute can be searched against.
+     */
+    is_searchable?: boolean;
+  }
+}
+
+export interface NamespaceListResponse {
+  results: Array<Namespace>;
 }
 
 Namespaces.Documents = Documents;
 Namespaces.Search = Search;
 
 export declare namespace Namespaces {
-  export { type Namespace as Namespace, type NamespaceAttributeConfig as NamespaceAttributeConfig };
+  export { type Namespace as Namespace, type NamespaceListResponse as NamespaceListResponse };
 
   export {
     Documents as Documents,
     type DeleteDocumentsResponse as DeleteDocumentsResponse,
     type Document as Document,
     type UpsertDocumentsResponse as UpsertDocumentsResponse,
+    type DocumentRetrieveParams as DocumentRetrieveParams,
+    type DocumentDeleteParams as DocumentDeleteParams,
+    type DocumentUpsertParams as DocumentUpsertParams,
   };
 
   export {
     Search as Search,
     type SearchResponse as SearchResponse,
     type SearchResult as SearchResult,
-    type SearchListResponse as SearchListResponse,
     type SearchCreateParams as SearchCreateParams,
   };
 }

@@ -17,7 +17,7 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import { Namespace, NamespaceAttributeConfig, Namespaces } from './resources/namespaces/namespaces';
+import { Namespace, NamespaceListResponse, Namespaces } from './resources/namespaces/namespaces';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -718,6 +718,9 @@ export class Charcoal {
 
   static toFile = Uploads.toFile;
 
+  /**
+   * Manage namespaces.
+   */
   namespaces: API.Namespaces = new API.Namespaces(this);
 }
 
@@ -729,6 +732,6 @@ export declare namespace Charcoal {
   export {
     Namespaces as Namespaces,
     type Namespace as Namespace,
-    type NamespaceAttributeConfig as NamespaceAttributeConfig,
+    type NamespaceListResponse as NamespaceListResponse,
   };
 }
