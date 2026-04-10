@@ -10,9 +10,7 @@ const client = new Charcoal({
 describe('resource documents', () => {
   // Mock server tests are disabled
   test.skip('retrieve: only required params', async () => {
-    const responsePromise = client.namespaces.search.documents.retrieve('documentId', {
-      namespace: 'namespace',
-    });
+    const responsePromise = client.namespaces.documents.retrieve('documentId', { namespace: 'namespace' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,16 +22,12 @@ describe('resource documents', () => {
 
   // Mock server tests are disabled
   test.skip('retrieve: required and optional params', async () => {
-    const response = await client.namespaces.search.documents.retrieve('documentId', {
-      namespace: 'namespace',
-    });
+    const response = await client.namespaces.documents.retrieve('documentId', { namespace: 'namespace' });
   });
 
   // Mock server tests are disabled
   test.skip('delete: only required params', async () => {
-    const responsePromise = client.namespaces.search.documents.delete('namespace', {
-      document_ids: ['string'],
-    });
+    const responsePromise = client.namespaces.documents.delete('namespace', { document_ids: ['string'] });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -45,16 +39,12 @@ describe('resource documents', () => {
 
   // Mock server tests are disabled
   test.skip('delete: required and optional params', async () => {
-    const response = await client.namespaces.search.documents.delete('namespace', {
-      document_ids: ['string'],
-    });
+    const response = await client.namespaces.documents.delete('namespace', { document_ids: ['string'] });
   });
 
   // Mock server tests are disabled
   test.skip('upsert: only required params', async () => {
-    const responsePromise = client.namespaces.search.documents.upsert('namespace', {
-      documents: [{ id: 'id' }],
-    });
+    const responsePromise = client.namespaces.documents.upsert('namespace', { documents: [{ id: 'id' }] });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -66,7 +56,7 @@ describe('resource documents', () => {
 
   // Mock server tests are disabled
   test.skip('upsert: required and optional params', async () => {
-    const response = await client.namespaces.search.documents.upsert('namespace', {
+    const response = await client.namespaces.documents.upsert('namespace', {
       documents: [{ id: 'id' }],
       schema: {
         foo: {

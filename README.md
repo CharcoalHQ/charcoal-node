@@ -29,9 +29,11 @@ const client = new Charcoal({
   apiKey: process.env['CHARCOAL_API_KEY'], // This is the default and can be omitted
 });
 
-const searchResponse = await client.namespaces.search.create('my-namespace', {
-  context: 'context',
-  objective: 'objective',
+const searchResponse = await client.namespaces.search.create('contracts', {
+  context:
+    'Find all sections related to indemnification, limitation of liability, or warranty disclaimers across our vendor contracts',
+  objective: 'Identify liability clauses',
+  stream: true,
 });
 
 console.log(searchResponse.session_id);
@@ -50,8 +52,8 @@ const client = new Charcoal({
 });
 
 const params: Charcoal.Namespaces.SearchCreateParams = {
-  context: 'context',
-  objective: 'objective',
+  context: 'What was our total revenue in Q4 2025?',
+  objective: 'Find revenue figures',
 };
 const searchResponse: Charcoal.Namespaces.SearchResponse = await client.namespaces.search.create(
   'my-namespace',
@@ -70,7 +72,10 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 const searchResponse = await client.namespaces.search
-  .create('my-namespace', { context: 'context', objective: 'objective' })
+  .create('my-namespace', {
+    context: 'What was our total revenue in Q4 2025?',
+    objective: 'Find revenue figures',
+  })
   .catch(async (err) => {
     if (err instanceof Charcoal.APIError) {
       console.log(err.status); // 400
@@ -111,7 +116,7 @@ const client = new Charcoal({
 });
 
 // Or, configure per-request:
-await client.namespaces.search.create('my-namespace', { context: 'context', objective: 'objective' }, {
+await client.namespaces.search.create('my-namespace', { context: 'What was our total revenue in Q4 2025?', objective: 'Find revenue figures' }, {
   maxRetries: 5,
 });
 ```
@@ -128,7 +133,7 @@ const client = new Charcoal({
 });
 
 // Override per-request:
-await client.namespaces.search.create('my-namespace', { context: 'context', objective: 'objective' }, {
+await client.namespaces.search.create('my-namespace', { context: 'What was our total revenue in Q4 2025?', objective: 'Find revenue figures' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -152,13 +157,19 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 const client = new Charcoal();
 
 const response = await client.namespaces.search
-  .create('my-namespace', { context: 'context', objective: 'objective' })
+  .create('my-namespace', {
+    context: 'What was our total revenue in Q4 2025?',
+    objective: 'Find revenue figures',
+  })
   .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
 const { data: searchResponse, response: raw } = await client.namespaces.search
-  .create('my-namespace', { context: 'context', objective: 'objective' })
+  .create('my-namespace', {
+    context: 'What was our total revenue in Q4 2025?',
+    objective: 'Find revenue figures',
+  })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(searchResponse.session_id);

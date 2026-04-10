@@ -5,12 +5,9 @@ export {
   type DeleteDocumentsResponse,
   type Document,
   type UpsertDocumentsResponse,
+  type DocumentRetrieveParams,
+  type DocumentDeleteParams,
+  type DocumentUpsertParams,
 } from './documents';
-export { Namespaces, type Namespace, type NamespaceAttributeConfig } from './namespaces';
-export {
-  Search,
-  type SearchResponse,
-  type SearchResult,
-  type SearchListResponse,
-  type SearchCreateParams,
-} from './search/index';
+export { Namespaces, type Namespace, type NamespaceListResponse } from './namespaces';
+export { Search, type SearchResponse, type SearchResult, type SearchCreateParams } from './search';
