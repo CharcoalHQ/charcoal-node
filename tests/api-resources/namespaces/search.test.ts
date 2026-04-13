@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Charcoal from 'charcoal';
+import Charcoal from '@charcoalhq/sdk';
 
 const client = new Charcoal({
   apiKey: 'My API Key',

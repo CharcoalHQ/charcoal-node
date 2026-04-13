@@ -1,6 +1,6 @@
 import fs from 'fs';
-import type { ResponseLike } from 'charcoal/internal/to-file';
-import { toFile } from 'charcoal/core/uploads';
+import type { ResponseLike } from '@charcoalhq/sdk/internal/to-file';
+import { toFile } from '@charcoalhq/sdk/core/uploads';
 import { File } from 'node:buffer';
 
 class MyClass {
@@ -97,7 +97,7 @@ describe('missing File error message', () => {
   });
 
   test('is thrown', async () => {
-    const uploads = await import('charcoal/core/uploads');
+    const uploads = await import('@charcoalhq/sdk/core/uploads');
     await expect(
       uploads.toFile(mockResponse({ url: 'https://example.com/my/audio.mp3' })),
     ).rejects.toMatchInlineSnapshot(

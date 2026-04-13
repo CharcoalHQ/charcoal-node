@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIPromise } from 'charcoal/core/api-promise';
+import { APIPromise } from '@charcoalhq/sdk/core/api-promise';
 
 import util from 'node:util';
-import Charcoal from 'charcoal';
-import { APIUserAbortError } from 'charcoal';
+import Charcoal from '@charcoalhq/sdk';
+import { APIUserAbortError } from '@charcoalhq/sdk';
 const defaultFetch = fetch;
 
 describe('instantiate client', () => {

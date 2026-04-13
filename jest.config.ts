@@ -7,8 +7,8 @@ const config: JestConfigWithTsJest = {
     '^.+\\.(t|j)sx?$': ['@swc/jest', { sourceMaps: 'inline' }],
   },
   moduleNameMapper: {
-    '^charcoal$': '<rootDir>/src/index.ts',
-    '^charcoal/(.*)$': '<rootDir>/src/$1',
+    '^@charcoalhq/sdk$': '<rootDir>/src/index.ts',
+    '^@charcoalhq/sdk/(.*)$': '<rootDir>/src/$1',
   },
   modulePathIgnorePatterns: [
     '<rootDir>/ecosystem-tests/',

@@ -1,4 +1,4 @@
-import { fromBase64, toBase64 } from 'charcoal/internal/utils/base64';
+import { fromBase64, toBase64 } from '@charcoalhq/sdk/internal/utils/base64';
 
 describe.each(['Buffer', 'atob'])('with %s', (mode) => {
   let originalBuffer: BufferConstructor;
