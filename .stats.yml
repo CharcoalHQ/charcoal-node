@@ -1,4 +1,4 @@
-configured_endpoints: 8
-openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/jetti%2Fcharcoal-ee3554910b7dd79a2cf81185f6a768b489ddebde3953e907af8d9c0dfd577881.yml
-openapi_spec_hash: 1d234501175ea810c56047536cda24b0
-config_hash: 904ba9d969d4d705b1c12738447fa4bb
+configured_endpoints: 9
+openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/jetti%2Fcharcoal-6cb1ae65bb785ce4230ccbe7cab27513f9c05539bc90ce85ff93a26fd117c594.yml
+openapi_spec_hash: 5e3d3540a8ad5ef7109cc88c7f25017d
+config_hash: 8e0d7666a2c2a6a6f1cce127d0affb78
