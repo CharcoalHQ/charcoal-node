@@ -30,6 +30,32 @@ describe('resource search', () => {
       objective: 'objective',
       filters: { $and: [{}] },
       include_attributes: true,
+      multiturn: true,
+      stream: true,
+    });
+  });
+
+  // Mock server tests are disabled
+  test.skip('continue: only required params', async () => {
+    const responsePromise = client.namespaces.search.continue('session_id', {
+      namespace: 'namespace',
+      message: 'message',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('continue: required and optional params', async () => {
+    const response = await client.namespaces.search.continue('session_id', {
+      namespace: 'namespace',
+      message: 'message',
+      include_attributes: true,
       stream: true,
     });
   });

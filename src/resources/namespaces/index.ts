@@ -10,4 +10,10 @@ export {
   type DocumentUpsertParams,
 } from './documents';
 export { Namespaces, type Namespace, type NamespaceListResponse } from './namespaces';
-export { Search, type SearchResponse, type SearchResult, type SearchCreateParams } from './search';
+export {
+  Search,
+  type SearchResponse,
+  type SearchResult,
+  type SearchCreateParams,
+  type SearchContinueParams,
+} from './search';

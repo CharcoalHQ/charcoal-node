@@ -33,6 +33,7 @@ Types:
 Methods:
 
 - <code title="post /v1/namespaces/{namespace}/search">client.namespaces.search.<a href="./src/resources/namespaces/search.ts">create</a>(namespace, { ...params }) -> SearchResponse</code>
+- <code title="post /v1/namespaces/{namespace}/search/{session_id}">client.namespaces.search.<a href="./src/resources/namespaces/search.ts">continue</a>(sessionID, { ...params }) -> SearchResponse</code>
 
 # APIKeys
 

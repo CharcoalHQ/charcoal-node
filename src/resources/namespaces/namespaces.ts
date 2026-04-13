@@ -12,7 +12,7 @@ import {
   UpsertDocumentsResponse,
 } from './documents';
 import * as SearchAPI from './search';
-import { Search, SearchCreateParams, SearchResponse, SearchResult } from './search';
+import { Search, SearchContinueParams, SearchCreateParams, SearchResponse, SearchResult } from './search';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
 
@@ -113,5 +113,6 @@ export declare namespace Namespaces {
     type SearchResponse as SearchResponse,
     type SearchResult as SearchResult,
     type SearchCreateParams as SearchCreateParams,
+    type SearchContinueParams as SearchContinueParams,
   };
 }
