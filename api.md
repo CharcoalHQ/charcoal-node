@@ -33,3 +33,17 @@ Types:
 Methods:
 
 - <code title="post /v1/namespaces/{namespace}/search">client.namespaces.search.<a href="./src/resources/namespaces/search.ts">create</a>(namespace, { ...params }) -> SearchResponse</code>
+
+# APIKeys
+
+Types:
+
+- <code><a href="./src/resources/api-keys.ts">APIKeyCreateResponse</a></code>
+- <code><a href="./src/resources/api-keys.ts">APIKeyListResponse</a></code>
+- <code><a href="./src/resources/api-keys.ts">APIKeyDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /v1/api_keys">client.apiKeys.<a href="./src/resources/api-keys.ts">create</a>({ ...params }) -> APIKeyCreateResponse</code>
+- <code title="get /v1/api_keys">client.apiKeys.<a href="./src/resources/api-keys.ts">list</a>() -> APIKeyListResponse</code>
+- <code title="delete /v1/api_keys/{id}">client.apiKeys.<a href="./src/resources/api-keys.ts">delete</a>(id) -> APIKeyDeleteResponse</code>
