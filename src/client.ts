@@ -17,6 +17,13 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
+import {
+  APIKeyCreateParams,
+  APIKeyCreateResponse,
+  APIKeyDeleteResponse,
+  APIKeyListResponse,
+  APIKeys,
+} from './resources/api-keys';
 import { Namespace, NamespaceListResponse, Namespaces } from './resources/namespaces/namespaces';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
@@ -722,9 +729,14 @@ export class Charcoal {
    * Manage namespaces.
    */
   namespaces: API.Namespaces = new API.Namespaces(this);
+  /**
+   * Manage API keys for programmatic access.
+   */
+  apiKeys: API.APIKeys = new API.APIKeys(this);
 }
 
 Charcoal.Namespaces = Namespaces;
+Charcoal.APIKeys = APIKeys;
 
 export declare namespace Charcoal {
   export type RequestOptions = Opts.RequestOptions;
@@ -733,5 +745,13 @@ export declare namespace Charcoal {
     Namespaces as Namespaces,
     type Namespace as Namespace,
     type NamespaceListResponse as NamespaceListResponse,
+  };
+
+  export {
+    APIKeys as APIKeys,
+    type APIKeyCreateResponse as APIKeyCreateResponse,
+    type APIKeyListResponse as APIKeyListResponse,
+    type APIKeyDeleteResponse as APIKeyDeleteResponse,
+    type APIKeyCreateParams as APIKeyCreateParams,
   };
 }
