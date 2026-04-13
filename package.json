@@ -1,5 +1,5 @@
 {
-  "name": "charcoal",
+  "name": "@charcoalhq/sdk",
   "version": "0.0.1",
   "description": "The official TypeScript library for the Charcoal API",
   "author": "Charcoal <>",

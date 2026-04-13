@@ -1,5 +1,5 @@
-import { multipartFormRequestOptions, createForm } from 'charcoal/internal/uploads';
-import { toFile } from 'charcoal/core/uploads';
+import { multipartFormRequestOptions, createForm } from '@charcoalhq/sdk/internal/uploads';
+import { toFile } from '@charcoalhq/sdk/core/uploads';
 
 describe('form data validation', () => {
   test('valid values do not error', async () => {

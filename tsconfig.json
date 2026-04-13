@@ -8,8 +8,8 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "paths": {
-      "charcoal/*": ["./src/*"],
-      "charcoal": ["./src/index.ts"]
+      "@charcoalhq/sdk/*": ["./src/*"],
+      "@charcoalhq/sdk": ["./src/index.ts"]
     },
     "noEmit": true,
 
