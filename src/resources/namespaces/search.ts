@@ -54,6 +54,11 @@ export class Search extends APIResource {
 export interface SearchResponse {
   results: Array<SearchResult>;
 
+  /**
+   * Unique identifier for this search session.
+   */
+  session_id: string;
+
   status: 'completed' | 'clarification_needed' | 'failed';
 
   /**
@@ -75,11 +80,6 @@ export interface SearchResponse {
    * Number of queries executed during the search.
    */
   queries_executed?: number;
-
-  /**
-   * Session identifier. Present when `multiturn` is `true`.
-   */
-  session_id?: string;
 }
 
 export namespace SearchResponse {
