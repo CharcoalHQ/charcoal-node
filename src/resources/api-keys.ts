@@ -13,7 +13,7 @@ export class APIKeys extends APIResource {
    * Creates a new API key for the authenticated organization. The response includes
    * the full `raw_key` — this is the only time it is returned, so store it securely.
    */
-  create(body: APIKeyCreateParams, options?: RequestOptions): APIPromise<APIKeyCreateResponse> {
+  create(body: APIKeyCreateParams, options?: RequestOptions): APIPromise<CreateAPIKeyResponse> {
     return this._client.post('/v1/api_keys', { body, ...options });
   }
 
@@ -34,12 +34,50 @@ export class APIKeys extends APIResource {
   }
 }
 
+export interface APIKey {
+  /**
+   * Unique API key identifier (e.g. `akey_CjXuYOtW`).
+   */
+  id: string;
+
+  /**
+   * ISO 8601 timestamp.
+   */
+  created_at: string;
+
+  /**
+   * Name or identifier of the user who created the key.
+   */
+  created_by: string;
+
+  /**
+   * The prefix portion of the key (e.g. `sk-prod`).
+   */
+  key_prefix: string;
+
+  /**
+   * The last few characters of the key, for display.
+   */
+  key_suffix: string;
+
+  /**
+   * ISO 8601 timestamp of the last request authenticated with this key, or `null` if
+   * never used.
+   */
+  last_used_at: string | null;
+
+  /**
+   * Human-readable key name.
+   */
+  name: string;
+}
+
 /**
  * Response from creating an API key. The `raw_key` field is only returned on
  * creation and cannot be retrieved again — store it securely.
  */
-export interface APIKeyCreateResponse {
-  api_key: APIKeyCreateResponse.APIKey;
+export interface CreateAPIKeyResponse {
+  api_key: APIKey;
 
   /**
    * The full API key. Only returned at creation time.
@@ -47,88 +85,8 @@ export interface APIKeyCreateResponse {
   raw_key: string;
 }
 
-export namespace APIKeyCreateResponse {
-  export interface APIKey {
-    /**
-     * Unique API key identifier (e.g. `akey_CjXuYOtW`).
-     */
-    id: string;
-
-    /**
-     * ISO 8601 timestamp.
-     */
-    created_at: string;
-
-    /**
-     * Name or identifier of the user who created the key.
-     */
-    created_by: string;
-
-    /**
-     * The prefix portion of the key (e.g. `sk-prod`).
-     */
-    key_prefix: string;
-
-    /**
-     * The last few characters of the key, for display.
-     */
-    key_suffix: string;
-
-    /**
-     * ISO 8601 timestamp of the last request authenticated with this key, or `null` if
-     * never used.
-     */
-    last_used_at: string | null;
-
-    /**
-     * Human-readable key name.
-     */
-    name: string;
-  }
-}
-
 export interface APIKeyListResponse {
-  api_keys: Array<APIKeyListResponse.APIKey>;
-}
-
-export namespace APIKeyListResponse {
-  export interface APIKey {
-    /**
-     * Unique API key identifier (e.g. `akey_CjXuYOtW`).
-     */
-    id: string;
-
-    /**
-     * ISO 8601 timestamp.
-     */
-    created_at: string;
-
-    /**
-     * Name or identifier of the user who created the key.
-     */
-    created_by: string;
-
-    /**
-     * The prefix portion of the key (e.g. `sk-prod`).
-     */
-    key_prefix: string;
-
-    /**
-     * The last few characters of the key, for display.
-     */
-    key_suffix: string;
-
-    /**
-     * ISO 8601 timestamp of the last request authenticated with this key, or `null` if
-     * never used.
-     */
-    last_used_at: string | null;
-
-    /**
-     * Human-readable key name.
-     */
-    name: string;
-  }
+  api_keys: Array<APIKey>;
 }
 
 export interface APIKeyDeleteResponse {
@@ -144,7 +102,8 @@ export interface APIKeyCreateParams {
 
 export declare namespace APIKeys {
   export {
-    type APIKeyCreateResponse as APIKeyCreateResponse,
+    type APIKey as APIKey,
+    type CreateAPIKeyResponse as CreateAPIKeyResponse,
     type APIKeyListResponse as APIKeyListResponse,
     type APIKeyDeleteResponse as APIKeyDeleteResponse,
     type APIKeyCreateParams as APIKeyCreateParams,

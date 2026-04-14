@@ -51,6 +51,144 @@ export class Search extends APIResource {
   }
 }
 
+export interface SearchContinuationRequest {
+  /**
+   * Follow-up message or answer to a clarification question.
+   */
+  message: string;
+
+  /**
+   * Whether to include document attributes in search results.
+   */
+  include_attributes?: boolean;
+
+  /**
+   * Whether to stream the response as server-sent events.
+   */
+  stream?: boolean;
+}
+
+export interface SearchRequest {
+  /**
+   * Additional context that helps the search system understand your intent. For
+   * example, relevant terminology, constraints, or prior knowledge.
+   */
+  context: string;
+
+  /**
+   * One sentence describing what you are looking for.
+   */
+  objective: string;
+
+  /**
+   * Recursive filter object. One of: `{ $and: [Filter, ...] }` (all must match),
+   * `{ $or: [Filter, ...] }` (any must match), or `{ field_name: FieldCondition }`
+   * (field-level condition).
+   */
+  filters?:
+    | SearchRequest.AndCondition
+    | SearchRequest.OrCondition
+    | {
+        [key: string]:
+          | string
+          | number
+          | boolean
+          | SearchRequest.Equals
+          | SearchRequest.NotEquals
+          | SearchRequest.GreaterThan
+          | SearchRequest.GreaterThanOrEqual
+          | SearchRequest.LessThan
+          | SearchRequest.LessThanOrEqual
+          | SearchRequest.In
+          | SearchRequest.NotIn
+          | SearchRequest.Contains
+          | SearchRequest.ContainsAny
+          | SearchRequest.Glob
+          | SearchRequest.CaseInsensitiveGlob;
+      };
+
+  /**
+   * Whether to include document attributes in search results.
+   */
+  include_attributes?: boolean;
+
+  /**
+   * Enable multi-turn mode. When `true`, the response includes a `session_id` and
+   * may return `clarification_needed` status. When `false` (default), the search
+   * always completes in a single request.
+   */
+  multiturn?: boolean;
+
+  /**
+   * Whether to stream the response as server-sent events.
+   */
+  stream?: boolean;
+}
+
+export namespace SearchRequest {
+  export interface AndCondition {
+    $and: Array<unknown>;
+  }
+
+  export interface OrCondition {
+    $or: Array<unknown>;
+  }
+
+  export interface Equals {
+    $eq?: string | number | boolean | null;
+  }
+
+  export interface NotEquals {
+    $neq?: string | number | boolean | null;
+  }
+
+  export interface GreaterThan {
+    $gt?: number;
+  }
+
+  export interface GreaterThanOrEqual {
+    $gte?: number;
+  }
+
+  export interface LessThan {
+    $lt?: number;
+  }
+
+  export interface LessThanOrEqual {
+    $lte?: number;
+  }
+
+  export interface In {
+    $in?: Array<string | number | boolean | null>;
+  }
+
+  export interface NotIn {
+    $not_in?: Array<string | number | boolean | null>;
+  }
+
+  export interface Contains {
+    $contains?: string | number | boolean | null;
+  }
+
+  export interface ContainsAny {
+    $contains_any?: Array<string | number | boolean | null>;
+  }
+
+  export interface Glob {
+    /**
+     * Case-sensitive glob pattern match.
+     */
+    $glob?: string;
+  }
+
+  export interface CaseInsensitiveGlob {
+    /**
+     * Case-insensitive glob pattern match.
+     */
+    $iglob?: string;
+  }
+}
+
 export interface SearchResponse {
   results: Array<SearchResult>;
 
@@ -261,6 +399,8 @@ export interface SearchContinueParams {
 
 export declare namespace Search {
   export {
+    type SearchContinuationRequest as SearchContinuationRequest,
+    type SearchRequest as SearchRequest,
     type SearchResponse as SearchResponse,
     type SearchResult as SearchResult,
     type SearchCreateParams as SearchCreateParams,

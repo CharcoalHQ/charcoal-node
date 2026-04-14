@@ -18,11 +18,12 @@ import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import {
+  APIKey,
   APIKeyCreateParams,
-  APIKeyCreateResponse,
   APIKeyDeleteResponse,
   APIKeyListResponse,
   APIKeys,
+  CreateAPIKeyResponse,
 } from './resources/api-keys';
 import { Namespace, NamespaceListResponse, Namespaces } from './resources/namespaces/namespaces';
 import { type Fetch } from './internal/builtin-types';
@@ -749,7 +750,8 @@ export declare namespace Charcoal {
 
   export {
     APIKeys as APIKeys,
-    type APIKeyCreateResponse as APIKeyCreateResponse,
+    type APIKey as APIKey,
+    type CreateAPIKeyResponse as CreateAPIKeyResponse,
     type APIKeyListResponse as APIKeyListResponse,
     type APIKeyDeleteResponse as APIKeyDeleteResponse,
     type APIKeyCreateParams as APIKeyCreateParams,

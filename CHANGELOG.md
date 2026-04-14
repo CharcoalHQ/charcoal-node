@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0 (2026-04-14)
+
+Full Changelog: [v0.1.1...v0.2.0](https://github.com/CharcoalHQ/charcoal-node/compare/v0.1.1...v0.2.0)
+
+### Features
+
+* **api:** manual updates ([1a64e49](https://github.com/CharcoalHQ/charcoal-node/commit/1a64e49d3ea9d1451bcbd61a3aceae7d8ec07a66))
+
 ## 0.1.1 (2026-04-14)
 
 Full Changelog: [v0.1.0...v0.1.1](https://github.com/CharcoalHQ/charcoal-node/compare/v0.1.0...v0.1.1)
