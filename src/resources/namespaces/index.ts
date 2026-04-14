@@ -12,6 +12,8 @@ export {
 export { Namespaces, type Namespace, type NamespaceListResponse } from './namespaces';
 export {
   Search,
+  type SearchContinuationRequest,
+  type SearchRequest,
   type SearchResponse,
   type SearchResult,
   type SearchCreateParams,
