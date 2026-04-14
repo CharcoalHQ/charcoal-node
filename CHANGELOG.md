@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.1 (2026-04-14)
+
+Full Changelog: [v0.1.0...v0.1.1](https://github.com/CharcoalHQ/charcoal-node/compare/v0.1.0...v0.1.1)
+
+### Chores
+
+* update SDK settings ([0e5fb98](https://github.com/CharcoalHQ/charcoal-node/commit/0e5fb9807f3bb2de1fa51337b854b74e7e58d3d3))
+
 ## 0.1.0 (2026-04-14)
 
 Full Changelog: [v0.0.1...v0.1.0](https://github.com/CharcoalHQ/charcoal-node/compare/v0.0.1...v0.1.0)
