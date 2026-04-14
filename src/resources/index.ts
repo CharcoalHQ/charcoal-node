@@ -2,7 +2,8 @@
 
 export {
   APIKeys,
-  type APIKeyCreateResponse,
+  type APIKey,
+  type CreateAPIKeyResponse,
   type APIKeyListResponse,
   type APIKeyDeleteResponse,
   type APIKeyCreateParams,

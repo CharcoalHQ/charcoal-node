@@ -28,7 +28,7 @@ const client = new Charcoal({
 
 const searchResponse = await client.namespaces.search.create('contracts', {
   context:
-    'Find all sections related to indemnification, limitation of liability, or warranty disclaimers across our vendor contracts',
+    'Reviewing vendor contracts for compliance. Focus on indemnification, warranty disclaimers, and liability caps. Ignore standard boilerplate.',
   objective: 'Identify liability clauses',
   stream: true,
 });
@@ -49,7 +49,8 @@ const client = new Charcoal({
 });
 
 const params: Charcoal.Namespaces.SearchCreateParams = {
-  context: 'What was our total revenue in Q4 2025?',
+  context:
+    'Looking for quarterly financial results, specifically total revenue and growth numbers.',
   objective: 'Find revenue figures',
 };
 const searchResponse: Charcoal.Namespaces.SearchResponse = await client.namespaces.search.create(
@@ -70,7 +71,8 @@ a subclass of `APIError` will be thrown:
 ```ts
 const searchResponse = await client.namespaces.search
   .create('my-namespace', {
-    context: 'What was our total revenue in Q4 2025?',
+    context:
+      'Looking for quarterly financial results, specifically total revenue and growth numbers.',
     objective: 'Find revenue figures',
   })
   .catch(async (err) => {
@@ -113,7 +115,7 @@ const client = new Charcoal({
 });
 
 // Or, configure per-request:
-await client.namespaces.search.create('my-namespace', { context: 'What was our total revenue in Q4 2025?', objective: 'Find revenue figures' }, {
+await client.namespaces.search.create('my-namespace', { context: 'Looking for quarterly financial results, specifically total revenue and growth numbers.', objective: 'Find revenue figures' }, {
   maxRetries: 5,
 });
 ```
@@ -130,7 +132,7 @@ const client = new Charcoal({
 });
 
 // Override per-request:
-await client.namespaces.search.create('my-namespace', { context: 'What was our total revenue in Q4 2025?', objective: 'Find revenue figures' }, {
+await client.namespaces.search.create('my-namespace', { context: 'Looking for quarterly financial results, specifically total revenue and growth numbers.', objective: 'Find revenue figures' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -155,7 +157,8 @@ const client = new Charcoal();
 
 const response = await client.namespaces.search
   .create('my-namespace', {
-    context: 'What was our total revenue in Q4 2025?',
+    context:
+      'Looking for quarterly financial results, specifically total revenue and growth numbers.',
     objective: 'Find revenue figures',
   })
   .asResponse();
@@ -164,7 +167,8 @@ console.log(response.statusText); // access the underlying Response object
 
 const { data: searchResponse, response: raw } = await client.namespaces.search
   .create('my-namespace', {
-    context: 'What was our total revenue in Q4 2025?',
+    context:
+      'Looking for quarterly financial results, specifically total revenue and growth numbers.',
     objective: 'Find revenue figures',
   })
   .withResponse();

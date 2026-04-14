@@ -27,6 +27,8 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/namespaces/search.ts">SearchContinuationRequest</a></code>
+- <code><a href="./src/resources/namespaces/search.ts">SearchRequest</a></code>
 - <code><a href="./src/resources/namespaces/search.ts">SearchResponse</a></code>
 - <code><a href="./src/resources/namespaces/search.ts">SearchResult</a></code>
 
@@ -39,12 +41,13 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/api-keys.ts">APIKeyCreateResponse</a></code>
+- <code><a href="./src/resources/api-keys.ts">APIKey</a></code>
+- <code><a href="./src/resources/api-keys.ts">CreateAPIKeyResponse</a></code>
 - <code><a href="./src/resources/api-keys.ts">APIKeyListResponse</a></code>
 - <code><a href="./src/resources/api-keys.ts">APIKeyDeleteResponse</a></code>
 
 Methods:
 
-- <code title="post /v1/api_keys">client.apiKeys.<a href="./src/resources/api-keys.ts">create</a>({ ...params }) -> APIKeyCreateResponse</code>
+- <code title="post /v1/api_keys">client.apiKeys.<a href="./src/resources/api-keys.ts">create</a>({ ...params }) -> CreateAPIKeyResponse</code>
 - <code title="get /v1/api_keys">client.apiKeys.<a href="./src/resources/api-keys.ts">list</a>() -> APIKeyListResponse</code>
 - <code title="delete /v1/api_keys/{id}">client.apiKeys.<a href="./src/resources/api-keys.ts">delete</a>(id) -> APIKeyDeleteResponse</code>
