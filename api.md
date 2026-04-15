@@ -31,6 +31,7 @@ Types:
 - <code><a href="./src/resources/namespaces/search.ts">SearchRequest</a></code>
 - <code><a href="./src/resources/namespaces/search.ts">SearchResponse</a></code>
 - <code><a href="./src/resources/namespaces/search.ts">SearchResult</a></code>
+- <code><a href="./src/resources/namespaces/search.ts">SearchStreamEvent</a></code>
 
 Methods:
 

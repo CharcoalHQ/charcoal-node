@@ -16,10 +16,15 @@ import {
   Search,
   SearchContinuationRequest,
   SearchContinueParams,
+  SearchContinueParamsNonStreaming,
+  SearchContinueParamsStreaming,
   SearchCreateParams,
+  SearchCreateParamsNonStreaming,
+  SearchCreateParamsStreaming,
   SearchRequest,
   SearchResponse,
   SearchResult,
+  SearchStreamEvent,
 } from './search';
 import { APIPromise } from '../../core/api-promise';
 import { RequestOptions } from '../../internal/request-options';
@@ -122,7 +127,12 @@ export declare namespace Namespaces {
     type SearchRequest as SearchRequest,
     type SearchResponse as SearchResponse,
     type SearchResult as SearchResult,
+    type SearchStreamEvent as SearchStreamEvent,
     type SearchCreateParams as SearchCreateParams,
+    type SearchCreateParamsNonStreaming as SearchCreateParamsNonStreaming,
+    type SearchCreateParamsStreaming as SearchCreateParamsStreaming,
     type SearchContinueParams as SearchContinueParams,
+    type SearchContinueParamsNonStreaming as SearchContinueParamsNonStreaming,
+    type SearchContinueParamsStreaming as SearchContinueParamsStreaming,
   };
 }
