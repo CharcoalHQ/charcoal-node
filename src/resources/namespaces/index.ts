@@ -16,6 +16,11 @@ export {
   type SearchRequest,
   type SearchResponse,
   type SearchResult,
+  type SearchStreamEvent,
   type SearchCreateParams,
+  type SearchCreateParamsNonStreaming,
+  type SearchCreateParamsStreaming,
   type SearchContinueParams,
+  type SearchContinueParamsNonStreaming,
+  type SearchContinueParamsStreaming,
 } from './search';

@@ -1,7 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import * as SearchAPI from './search';
 import { APIPromise } from '../../core/api-promise';
+import { Stream } from '../../core/streaming';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -16,38 +18,70 @@ export class Search extends APIResource {
    * and may return `clarification_needed` status when the system needs more
    * information.
    *
-   * ### Streaming
-   *
-   * Set `stream: true` to receive results as server-sent events. The stream emits
-   * three event types:
-   *
-   * - **`status`** — Progress updates during search. Payload:
-   *   `{ "message": "string" }`
-   * - **`session_result`** — The final search result. Payload matches the
-   *   non-streaming response schema.
-   * - **`error`** — Sent if the search fails. Payload: `{ "code": "string" }`
-   *
-   * The stream closes after either a `session_result` or `error` event.
+   * Set `stream: true` to receive results as server-sent events; see
+   * `SearchStreamEvent` for the event shape. The stream closes after either a
+   * `session_result` or `error` event.
    */
-  create(namespace: string, body: SearchCreateParams, options?: RequestOptions): APIPromise<SearchResponse> {
-    return this._client.post(path`/v1/namespaces/${namespace}/search`, { body, ...options });
+  create(
+    namespace: string,
+    body: SearchCreateParamsNonStreaming,
+    options?: RequestOptions,
+  ): APIPromise<SearchResponse>;
+  create(
+    namespace: string,
+    body: SearchCreateParamsStreaming,
+    options?: RequestOptions,
+  ): APIPromise<Stream<SearchStreamEvent>>;
+  create(
+    namespace: string,
+    body: SearchCreateParamsBase,
+    options?: RequestOptions,
+  ): APIPromise<Stream<SearchStreamEvent> | SearchResponse>;
+  create(
+    namespace: string,
+    body: SearchCreateParams,
+    options?: RequestOptions,
+  ): APIPromise<SearchResponse> | APIPromise<Stream<SearchStreamEvent>> {
+    return this._client.post(path`/v1/namespaces/${namespace}/search`, {
+      body,
+      ...options,
+      stream: body.stream ?? false,
+    }) as APIPromise<SearchResponse> | APIPromise<Stream<SearchStreamEvent>>;
   }
 
   /**
    * Continues a multi-turn search session. Use this to respond to clarification
    * questions or provide follow-up messages.
    *
-   * ### Streaming
-   *
-   * Supports the same `stream` parameter and SSE event types as the search endpoint.
+   * Supports the same `stream` parameter and event types as the search endpoint; see
+   * `SearchStreamEvent`.
    */
+  continue(
+    sessionID: string,
+    params: SearchContinueParamsNonStreaming,
+    options?: RequestOptions,
+  ): APIPromise<SearchResponse>;
+  continue(
+    sessionID: string,
+    params: SearchContinueParamsStreaming,
+    options?: RequestOptions,
+  ): APIPromise<Stream<SearchStreamEvent>>;
+  continue(
+    sessionID: string,
+    params: SearchContinueParamsBase,
+    options?: RequestOptions,
+  ): APIPromise<Stream<SearchStreamEvent> | SearchResponse>;
   continue(
     sessionID: string,
     params: SearchContinueParams,
     options?: RequestOptions,
-  ): APIPromise<SearchResponse> {
+  ): APIPromise<SearchResponse> | APIPromise<Stream<SearchStreamEvent>> {
     const { namespace, ...body } = params;
-    return this._client.post(path`/v1/namespaces/${namespace}/search/${sessionID}`, { body, ...options });
+    return this._client.post(path`/v1/namespaces/${namespace}/search/${sessionID}`, {
+      body,
+      ...options,
+      stream: params.stream ?? false,
+    }) as APIPromise<SearchResponse> | APIPromise<Stream<SearchStreamEvent>>;
   }
 }
 
@@ -253,7 +287,52 @@ export interface SearchResult {
   attributes?: { [key: string]: unknown };
 }
 
-export interface SearchCreateParams {
+/**
+ * One event yielded from a streaming search response. Discriminate on the `type`
+ * field to handle each event variant.
+ */
+export type SearchStreamEvent =
+  | SearchStreamEvent.SearchStatusEvent
+  | SearchStreamEvent.SearchSessionResultEvent
+  | SearchStreamEvent.SearchErrorEvent;
+
+export namespace SearchStreamEvent {
+  /**
+   * Progress update emitted while a search is running.
+   */
+  export interface SearchStatusEvent {
+    /**
+     * Human-readable progress message.
+     */
+    message: string;
+
+    type: 'status';
+  }
+
+  /**
+   * Final search result. Carries the same fields as `SearchResponse` plus a `type`
+   * discriminator.
+   */
+  export interface SearchSessionResultEvent extends SearchAPI.SearchResponse {
+    type: 'session_result';
+  }
+
+  /**
+   * Emitted when a streaming search fails.
+   */
+  export interface SearchErrorEvent {
+    /**
+     * Stable error code describing the failure.
+     */
+    code: string;
+
+    type: 'error';
+  }
+}
+
+export type SearchCreateParams = SearchCreateParamsNonStreaming | SearchCreateParamsStreaming;
+
+export interface SearchCreateParamsBase {
   /**
    * Additional context that helps the search system understand your intent. For
    * example, relevant terminology, constraints, or prior knowledge.
@@ -372,9 +451,28 @@ export namespace SearchCreateParams {
      */
     $iglob?: string;
   }
+
+  export type SearchCreateParamsNonStreaming = SearchAPI.SearchCreateParamsNonStreaming;
+  export type SearchCreateParamsStreaming = SearchAPI.SearchCreateParamsStreaming;
 }
 
-export interface SearchContinueParams {
+export interface SearchCreateParamsNonStreaming extends SearchCreateParamsBase {
+  /**
+   * Whether to stream the response as server-sent events.
+   */
+  stream?: false;
+}
+
+export interface SearchCreateParamsStreaming extends SearchCreateParamsBase {
+  /**
+   * Whether to stream the response as server-sent events.
+   */
+  stream: true;
+}
+
+export type SearchContinueParams = SearchContinueParamsNonStreaming | SearchContinueParamsStreaming;
+
+export interface SearchContinueParamsBase {
   /**
    * Path param: Namespace identifier. Alphanumeric characters, hyphens, underscores,
    * and dots. Max 128 characters.
@@ -397,13 +495,37 @@ export interface SearchContinueParams {
   stream?: boolean;
 }
 
+export namespace SearchContinueParams {
+  export type SearchContinueParamsNonStreaming = SearchAPI.SearchContinueParamsNonStreaming;
+  export type SearchContinueParamsStreaming = SearchAPI.SearchContinueParamsStreaming;
+}
+
+export interface SearchContinueParamsNonStreaming extends SearchContinueParamsBase {
+  /**
+   * Body param: Whether to stream the response as server-sent events.
+   */
+  stream?: false;
+}
+
+export interface SearchContinueParamsStreaming extends SearchContinueParamsBase {
+  /**
+   * Body param: Whether to stream the response as server-sent events.
+   */
+  stream: true;
+}
+
 export declare namespace Search {
   export {
     type SearchContinuationRequest as SearchContinuationRequest,
     type SearchRequest as SearchRequest,
     type SearchResponse as SearchResponse,
     type SearchResult as SearchResult,
+    type SearchStreamEvent as SearchStreamEvent,
     type SearchCreateParams as SearchCreateParams,
+    type SearchCreateParamsNonStreaming as SearchCreateParamsNonStreaming,
+    type SearchCreateParamsStreaming as SearchCreateParamsStreaming,
     type SearchContinueParams as SearchContinueParams,
+    type SearchContinueParamsNonStreaming as SearchContinueParamsNonStreaming,
+    type SearchContinueParamsStreaming as SearchContinueParamsStreaming,
   };
 }
