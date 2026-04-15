@@ -36,6 +36,29 @@ const searchResponse = await client.namespaces.search.create('contracts', {
 console.log(searchResponse.session_id);
 ```
 
+## Streaming responses
+
+We provide support for streaming responses using Server Sent Events (SSE).
+
+```ts
+import Charcoal from '@charcoalhq/sdk';
+
+const client = new Charcoal();
+
+const stream = await client.namespaces.search.create('contracts', {
+  context:
+    'Reviewing vendor contracts for compliance. Focus on indemnification, warranty disclaimers, and liability caps. Ignore standard boilerplate.',
+  objective: 'Identify liability clauses',
+  stream: true,
+});
+for await (const searchStreamEvent of stream) {
+  console.log(searchStreamEvent.session_id);
+}
+```
+
+If you need to cancel a stream, you can `break` from the loop
+or call `stream.controller.abort()`.
+
 ### Request & Response types
 
 This library includes TypeScript definitions for all request params and response fields. You may import and use them like so:

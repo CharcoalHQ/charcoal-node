@@ -31,7 +31,7 @@ describe('resource search', () => {
       filters: { $and: [{}] },
       include_attributes: true,
       multiturn: true,
-      stream: true,
+      stream: false,
     });
   });
 
@@ -56,7 +56,7 @@ describe('resource search', () => {
       namespace: 'namespace',
       message: 'message',
       include_attributes: true,
-      stream: true,
+      stream: false,
     });
   });
 });
