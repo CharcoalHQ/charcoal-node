@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0 (2026-04-15)
+
+Full Changelog: [v0.2.0...v0.3.0](https://github.com/CharcoalHQ/charcoal-node/compare/v0.2.0...v0.3.0)
+
+### Features
+
+* stainless: generate proper streaming types for search ([2d68edc](https://github.com/CharcoalHQ/charcoal-node/commit/2d68edc88a2e7709eb8bf9e639572921fa500fa2))
+
 ## 0.2.0 (2026-04-14)
 
 Full Changelog: [v0.1.1...v0.2.0](https://github.com/CharcoalHQ/charcoal-node/compare/v0.1.1...v0.2.0)
