@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.4.0 (2026-04-28)
+
+Full Changelog: [v0.3.0...v0.4.0](https://github.com/CharcoalHQ/charcoal-node/compare/v0.3.0...v0.4.0)
+
+### Features
+
+* support setting headers via env ([d4813c2](https://github.com/CharcoalHQ/charcoal-node/commit/d4813c2afcd792309e80788f50fa8c67497284b0))
+
+
+### Chores
+
+* **internal:** codegen related update ([bd01292](https://github.com/CharcoalHQ/charcoal-node/commit/bd01292a75e6b01f36e106f7f0c227b41f747d0d))
+* **internal:** more robust bootstrap script ([ea05ae5](https://github.com/CharcoalHQ/charcoal-node/commit/ea05ae5c3bf1f6d525e76a4be3d9f6d7e8d27ede))
+
 ## 0.3.0 (2026-04-15)
 
 Full Changelog: [v0.2.0...v0.3.0](https://github.com/CharcoalHQ/charcoal-node/compare/v0.2.0...v0.3.0)
