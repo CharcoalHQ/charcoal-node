@@ -28,7 +28,7 @@ describe('resource search', () => {
     const response = await client.namespaces.search.create('namespace', {
       context: 'context',
       objective: 'objective',
-      filters: { $and: [{}] },
+      filters: { $and: [] },
       include_attributes: true,
       multiturn: true,
       stream: false,
